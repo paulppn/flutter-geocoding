@@ -74,7 +74,7 @@ class _GeocodeWidgetState extends State<GeocodeWidget> {
                   final latitude = double.parse(_latitudeController.text);
                   final longitude = double.parse(_longitudeController.text);
 
-                  placemarkFromCoordinates(latitude, longitude)
+                  Geocoding.placemarkFromCoordinates(latitude, longitude)
                       .then((placemarks) {
                     var output = 'No results found.';
                     if (placemarks.isNotEmpty) {
@@ -106,7 +106,7 @@ class _GeocodeWidgetState extends State<GeocodeWidget> {
             child: ElevatedButton(
                 child: Text('Look up location'),
                 onPressed: () {
-                  locationFromAddress(_addressController.text)
+                  Geocoding.locationFromAddress(_addressController.text)
                       .then((locations) {
                     var output = 'No results found.';
                     if (locations.isNotEmpty) {

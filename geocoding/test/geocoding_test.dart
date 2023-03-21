@@ -29,12 +29,12 @@ void main() {
     });
 
     test('locationFromAddress', () async {
-      final locations = await (locationFromAddress(''));
+      final locations = await (Geocoding.locationFromAddress(''));
       expect(locations.single, mockLocation);
     });
 
     test('placemarkFromCoordinates', () async {
-      final placemarks = await (placemarkFromCoordinates(0, 0));
+      final placemarks = await (Geocoding.placemarkFromCoordinates(0, 0));
       expect(placemarks.single, mockPlacemark);
     });
   });

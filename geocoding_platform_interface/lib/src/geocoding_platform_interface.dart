@@ -1,4 +1,5 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 import 'implementations/method_channel_geocoding.dart';
 import 'models/models.dart';
 
@@ -31,6 +32,14 @@ abstract class GeocodingPlatform extends PlatformInterface {
     _instance = instance;
   }
 
+  /// Sets the locale identifier used for the geocoding.
+  Future<void> setLocaleIdentifier(
+    String localeIdentifier,
+  ) {
+    throw UnimplementedError(
+        'setLocaleIdentifier() has not been implementated.');
+  }
+
   /// Returns a list of [Location] instances found for the supplied address.
   ///
   /// In most situations the returned list should only contain one entry.
@@ -43,9 +52,8 @@ abstract class GeocodingPlatform extends PlatformInterface {
   /// The `localeIdentifier` should be formatted using the syntax:
   /// [languageCode]_[countryCode] (eg. en_US or nl_NL).
   Future<List<Location>> locationFromAddress(
-    String address, {
-    String? localeIdentifier,
-  }) {
+    String address,
+  ) {
     throw UnimplementedError(
         'locationFromAddress() has not been implementated.');
   }
@@ -64,9 +72,8 @@ abstract class GeocodingPlatform extends PlatformInterface {
   /// [languageCode]_[countryCode] (eg. en_US or nl_NL).
   Future<List<Placemark>> placemarkFromCoordinates(
     double latitude,
-    double longitude, {
-    String? localeIdentifier,
-  }) {
+    double longitude,
+  ) {
     throw UnimplementedError(
         'placemarkFromCoordinates() has not been implementated.');
   }

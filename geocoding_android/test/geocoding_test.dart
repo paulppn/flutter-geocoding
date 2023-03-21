@@ -25,7 +25,7 @@ final mockPlacemark = Placemark(
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  const channel = MethodChannel('flutter.baseflow.com/geocoding');
+  const channel = MethodChannel('flutter.baseflow.com/geocoding_android');
   late List<MethodCall> log;
 
   setUp(() {
