@@ -1,6 +1,5 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import 'implementations/method_channel_geocoding.dart';
 import 'models/models.dart';
 
 /// The interface that implementations of Geocoding  must implement.
@@ -17,17 +16,20 @@ abstract class GeocodingPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static GeocodingPlatform _instance = MethodChannelGeocoding();
+  static GeocodingPlatform? _instance;
 
   /// The default instance of [GeocodingPlatform] to use.
-  ///
-  /// Defaults to [MethodChannelgeocoding].
-  static GeocodingPlatform get instance => _instance;
+  static GeocodingPlatform? get instance => _instance;
 
   /// Platform-specific plugins should set this with their own
   /// platform-specific class that extends [GeocodingPlatform] when they
   /// register themselves.
-  static set instance(GeocodingPlatform instance) {
+  static set instance(GeocodingPlatform? instance) {
+    if (instance == null) {
+      throw AssertionError(
+        'Instance of gecodoing platform has to be non-null',
+      );
+    }
     PlatformInterface.verifyToken(instance, _token);
     _instance = instance;
   }
