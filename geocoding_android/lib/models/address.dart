@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:geocoding_platform_interface/geocoding_platform_interface.dart';
 import 'package:meta/meta.dart';
 
@@ -101,7 +102,7 @@ class Address {
   @override
   bool operator ==(dynamic other) =>
       other is Address &&
-      other.addressLine == addressLine &&
+      listEquals(other.addressLine, addressLine) &&
       other.adminArea == adminArea &&
       other.countryCode == countryCode &&
       other.countryName == countryName &&

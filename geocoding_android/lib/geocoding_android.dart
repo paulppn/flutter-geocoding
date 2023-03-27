@@ -26,12 +26,30 @@ class GeocodingAndroid extends GeocodingPlatform {
   Future<List<Address>> getFromLocationName(
     String address, {
     int? maxResults,
+    double? lowerLeftLatitude,
+    double? lowerLeftLongitude,
+    double? upperRightLatitude,
+    double? upperRightLongitude,
   }) async {
     final parameters = <String, dynamic>{
       'address': address,
     };
 
     parameters['maxResults'] = maxResults ?? 5;
+
+    if (lowerLeftLatitude != null) {
+      parameters['lowerLeftLatitude'] = lowerLeftLatitude;
+    }
+    if (lowerLeftLatitude != null) {
+      parameters['lowerLeftLongitude'] = lowerLeftLongitude;
+    }
+    if (lowerLeftLatitude != null) {
+      parameters['upperRightLatitude'] = upperRightLatitude;
+    }
+    if (lowerLeftLatitude != null) {
+      parameters['upperRightLongitude'] = upperRightLongitude;
+    }
+
     try {
       final placemarks = await _channel.invokeMethod(
         'getFromLocationName',

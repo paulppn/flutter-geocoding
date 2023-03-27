@@ -117,6 +117,26 @@ final class MethodCallHandlerImpl implements MethodCallHandler {
         final String address = call.argument("address");
         final int maxResults = call.argument("maxResults");
 
+        Double lowerLeftLatitude = null;
+        if (call.hasArgument("lowerLeftLatitude")) {
+            lowerLeftLatitude = call.argument("lowerLeftLatitude");
+        }
+
+        Double lowerLeftLongitude = null;
+        if (call.hasArgument("lowerLeftLongitude")) {
+            lowerLeftLongitude = call.argument("lowerLeftLongitude");
+        }
+
+        Double upperRightLatitude = null;
+        if (call.hasArgument("upperRightLatitude")) {
+            upperRightLatitude = call.argument("upperRightLatitude");
+        }
+
+        Double upperRightLongitude = null;
+        if (call.hasArgument("upperRightLongitude")) {
+            upperRightLongitude = call.argument("upperRightLongitude");
+        }
+
         if (address == null || address.isEmpty()) {
             result.error(
                     "ARGUMENT_ERROR",
@@ -125,9 +145,21 @@ final class MethodCallHandlerImpl implements MethodCallHandler {
         }
 
         try {
-            final List<Address> addresses = geocoding.getFromLocationName(
-                    address,
-                    maxResults);
+            List<Address> addresses = null;
+
+            if (lowerLeftLatitude == null) {
+                addresses = geocoding.getFromLocationName(
+                        address,
+                        maxResults);
+            } else {
+                addresses = geocoding.getFromLocationName(
+                        address,
+                        maxResults,
+                        lowerLeftLatitude,
+                        lowerLeftLongitude,
+                        upperRightLatitude,
+                        upperRightLongitude);
+            }
 
             if (addresses == null || addresses.isEmpty()) {
                 result.error(
